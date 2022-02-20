@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Exclude } from 'class-transformer';
+import { User } from 'src/auth/user.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class File {
@@ -18,4 +20,8 @@ export class File {
     type: 'bytea',
   })
   data: Uint8Array;
+
+  @ManyToOne((type) => User, (user) => user.files, { eager: false })
+  @Exclude()
+  user: User;
 }

@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Exclude } from 'class-transformer';
+import { File } from 'src/upload/file.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -9,5 +11,10 @@ export class User {
   username: string;
 
   @Column()
+  @Exclude()
   password: string;
+
+  @OneToMany((type) => File, (file) => file.user, { eager: false })
+  @Exclude()
+  files: File[];
 }
