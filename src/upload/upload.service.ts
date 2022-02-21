@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/auth/user.entity';
+import { File } from './file.entity';
 import { FileRepository } from './file.repository';
 
 @Injectable()
@@ -9,6 +10,10 @@ export class UploadService {
     @InjectRepository(FileRepository)
     private fileRepository: FileRepository,
   ) {}
+
+  getFiles(user: User): Promise<File[]> {
+    return this.fileRepository.getFiles(user);
+  }
 
   async uploadFile(file: Express.Multer.File, user: User): Promise<void> {
     if (!file) {

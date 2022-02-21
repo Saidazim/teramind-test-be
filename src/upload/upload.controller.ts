@@ -11,6 +11,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/auth/user.entity';
+import { File } from './file.entity';
 import { UploadService } from './upload.service';
 
 @Controller('upload')
@@ -18,6 +19,11 @@ import { UploadService } from './upload.service';
 @UseInterceptors(ClassSerializerInterceptor)
 export class UploadController {
   constructor(private uploadService: UploadService) {}
+
+  @Get()
+  getFiles(@GetUser() user: User): Promise<File[]> {
+    return this.uploadService.getFiles(user);
+  }
 
   @Post()
   @UseInterceptors(
