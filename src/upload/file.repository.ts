@@ -12,7 +12,7 @@ export class FileRepository extends Repository<File> {
     return this.findOne({ id, user });
   }
 
-  async uploadFile(file: Express.Multer.File, user: User): Promise<void> {
+  async uploadFile(file: Express.Multer.File, user: User): Promise<string> {
     const { size, buffer } = file;
     const uploadtime = new Date(Date.now()).toLocaleString();
     const fileData = this.create({
@@ -22,7 +22,8 @@ export class FileRepository extends Repository<File> {
       data: buffer,
       user,
     });
-
     await this.save(fileData);
+
+    return fileData.id;
   }
 }

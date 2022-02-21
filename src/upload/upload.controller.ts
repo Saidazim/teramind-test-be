@@ -47,7 +47,7 @@ export class UploadController {
   uploadFile(
     @UploadedFile() file: Express.Multer.File,
     @GetUser() user: User,
-  ): Promise<void> {
+  ): Promise<string> {
     return this.uploadService.uploadFile(file, user);
   }
 }
