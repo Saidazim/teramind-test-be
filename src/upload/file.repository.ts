@@ -8,6 +8,10 @@ export class FileRepository extends Repository<File> {
     return this.find({ user });
   }
 
+  getFileById(id: string, user: User): Promise<File> {
+    return this.findOne({ id, user });
+  }
+
   async uploadFile(file: Express.Multer.File, user: User): Promise<void> {
     const { size, buffer } = file;
     const uploadtime = new Date(Date.now()).toLocaleString();

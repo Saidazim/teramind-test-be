@@ -19,7 +19,7 @@ export class File {
   @Column({
     type: 'bytea',
   })
-  @Exclude({ toPlainOnly: true })
+  @Exclude()
   data: Uint8Array;
 
   @ManyToOne((type) => User, (user) => user.files, { eager: false })

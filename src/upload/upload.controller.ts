@@ -2,6 +2,7 @@ import {
   ClassSerializerInterceptor,
   Controller,
   Get,
+  Param,
   Post,
   UploadedFile,
   UseGuards,
@@ -16,13 +17,18 @@ import { UploadService } from './upload.service';
 
 @Controller('upload')
 @UseGuards(AuthGuard())
-@UseInterceptors(ClassSerializerInterceptor)
 export class UploadController {
   constructor(private uploadService: UploadService) {}
 
   @Get()
+  @UseInterceptors(ClassSerializerInterceptor)
   getFiles(@GetUser() user: User): Promise<File[]> {
     return this.uploadService.getFiles(user);
+  }
+
+  @Get(':id')
+  getFileById(@Param('id') id: string, @GetUser() user: User): Promise<File> {
+    return this.uploadService.getFileById(id, user);
   }
 
   @Post()

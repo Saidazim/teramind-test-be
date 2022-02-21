@@ -15,6 +15,10 @@ export class UploadService {
     return this.fileRepository.getFiles(user);
   }
 
+  getFileById(id: string, user: User): Promise<File> {
+    return this.fileRepository.getFileById(id, user);
+  }
+
   async uploadFile(file: Express.Multer.File, user: User): Promise<void> {
     if (!file) {
       throw new BadRequestException('Provided item is not a plain text file.');
