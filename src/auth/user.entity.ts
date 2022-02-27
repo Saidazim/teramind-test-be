@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer';
-import { File } from 'src/upload/file.entity';
+import { File } from 'src/file/file.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

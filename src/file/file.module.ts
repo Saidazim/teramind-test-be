@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from 'src/auth/auth.module';
 import { FileRepository } from './file.repository';
-import { UploadController } from './upload.controller';
-import { UploadService } from './upload.service';
+import { FileController } from './file.controller';
+import { FileService } from './file.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([FileRepository]), AuthModule],
-  controllers: [UploadController],
-  providers: [UploadService],
+  controllers: [FileController],
+  providers: [FileService],
 })
 export class UploadModule {}

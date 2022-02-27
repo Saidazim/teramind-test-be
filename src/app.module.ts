@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
-import { UploadModule } from './upload/upload.module';
+import { UploadModule } from './file/file.module';
 
 @Module({
   imports: [

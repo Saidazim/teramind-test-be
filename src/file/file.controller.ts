@@ -13,22 +13,22 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/auth/user.entity';
 import { File } from './file.entity';
-import { UploadService } from './upload.service';
+import { FileService } from './file.service';
 
-@Controller('upload')
+@Controller('files')
 @UseGuards(AuthGuard())
-export class UploadController {
-  constructor(private uploadService: UploadService) {}
+export class FileController {
+  constructor(private fileService: FileService) {}
 
   @Get()
   @UseInterceptors(ClassSerializerInterceptor)
   getFiles(@GetUser() user: User): Promise<File[]> {
-    return this.uploadService.getFiles(user);
+    return this.fileService.getFiles(user);
   }
 
   @Get(':id')
   getFileById(@Param('id') id: string, @GetUser() user: User): Promise<File> {
-    return this.uploadService.getFileById(id, user);
+    return this.fileService.getFileById(id, user);
   }
 
   @Post()
@@ -48,6 +48,6 @@ export class UploadController {
     @UploadedFile() file: Express.Multer.File,
     @GetUser() user: User,
   ): Promise<string> {
-    return this.uploadService.uploadFile(file, user);
+    return this.fileService.uploadFile(file, user);
   }
 }

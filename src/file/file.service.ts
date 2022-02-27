@@ -5,7 +5,7 @@ import { File } from './file.entity';
 import { FileRepository } from './file.repository';
 
 @Injectable()
-export class UploadService {
+export class FileService {
   constructor(
     @InjectRepository(FileRepository)
     private fileRepository: FileRepository,
